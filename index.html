@@ -7,6 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heegwon's log</title>
 
+  <!-- 제이쿼리 -->
+  <!-- js 쉽게 만들어 줌 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+  <!-- 테일윈드 -->
+  <!-- css 디자인 쉽게 만들어 줌 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
   <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
@@ -42,7 +51,7 @@
     #viewer-1 {
       padding: 0 10px;
     }
-
+    
     html>body,
     html>body .toastui-editor-contents,
     html>body .toastui-editor-contents code,
@@ -55,15 +64,47 @@
 
 <body>
 
-  <div id="viewer-1"></div>
-  <ul>
-    <li><a href="javascript:showPage(5)">5번글</a> </li>
-    <li><a href="javascript:showPage(4)">4번글</a> </li>
-    <li><a href="javascript:showPage(3)">3번글</a> </li>
-    <li><a href="javascript:showPage(2)">2번글</a> </li>
-    <li><a href="javascript:showPage(1)">1번글</a> </li>
-  </ul>
-
+    <div class="page-head text-3xl font-bold p-2">
+      <span class="current-page-no text-lg"></span>
+      <span class="current-page-subject"></span>
+      <span class="current-page-createDate text-lg"></span>
+    </div>
+  
+    <div id="viewer-1">
+    </div>
+  
+    <ul class="list">
+      <li>
+        <a href="javascript:;" onclick="showPage(this);" class="block p-2 hover:text-red-500 flex gap-2">
+          <span class="data-id-4">4</span>
+          <span class="mr-auto underline">uml 예시</span>
+          <span>2023-03-07</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" onclick="showPage(this);" class="block p-2 hover:text-red-500 flex gap-2">
+          <span class="data-id-3">3</span>
+          <span class="mr-auto underline">HTML 기초</span>
+          <span>2023-03-07</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" onclick="showPage(this);" class="block p-2 hover:text-red-500 flex gap-2">
+          <span class="data-id-2">2</span>
+          <span class="mr-auto underline">CSS 기초</span>
+          <span>2023-03-07</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" onclick="showPage(this);" class="block p-2 hover:text-red-500 flex gap-2">
+          <span class="data-id-1">1</span>
+          <span class="mr-auto underline">JAVA 기초</span>
+          <span>2023-03-07</span>
+        </a>
+      </li>
+    </ul>
+  
+  
   <script>
     const Editor = toastui.Editor;
 
@@ -116,8 +157,15 @@
           });
         })
     }
+    
+    const params = new URL(document.location).searchParams;
+    const paramId = params.get("id");
 
-    showPage(5);
+    if ($('.data-id-' + paramId).length == 1) {
+      $('.data-id-' + paramId).parent().click();
+    } else {
+      $('.list > li:first-child > a').click();
+    }
     
   </script>
 
